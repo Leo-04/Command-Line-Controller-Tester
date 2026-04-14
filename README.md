@@ -6,10 +6,12 @@ This is a simple command line app for testing controllers using the SDL2 joystic
 
 ### Linux
 For linux, SDL2 libaries must be installed
+
 Build using `bash ./compile.sh`
 
 ### Windows
 Build using `compile`
+
 The file `SDL2.dll` must be present at run-time for the application to work.
 
 ## Controls

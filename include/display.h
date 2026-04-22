@@ -1,14 +1,26 @@
-#include <stdio.h>
-#include <stdlib.h>
+#ifndef INCLUDE_DISPLAY_H
+#define INCLUDE_DISPLAY_H
 
-#include "console.h"
+#include <stdlib.h>
 
 #include "SDL2/SDL.h"
 
 int GetMaxScroll(SDL_Joystick*);
 int UpdateControllerGraphic(size_t, size_t, SDL_Joystick*, int, int, int);
 
+#endif // INCLUDE_DISPLAY_H
 #ifdef DISPLAY_IMPLEMENTATION
+
+#ifdef __LINUX__
+#define fULONG "lu"
+#else
+#define fULONG "llu"
+#endif
+
+#include "console.h"
+
+#include <stdio.h>
+#include <string.h>
 
 /*
 * Gets the maximum amount of lines needed to
@@ -31,7 +43,6 @@ int GetMaxScroll(SDL_Joystick* joystick){
 
     return max;
 }
-
 
 /*
 * Prints a grapic about a given joystick

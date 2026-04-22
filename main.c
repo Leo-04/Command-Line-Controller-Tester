@@ -1,14 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define INIT_IMPLEMENTATION
-#define JOYSTICK_IMPLEMENTATION
-#define CONSOLE_IMPLEMENTATION
-#define DISPLAY_IMPLEMENTATION
 #include "init.h"
 #include "joysticks.h"
 #include "console.h"
 #include "display.h"
+
+#define INIT_IMPLEMENTATION
+#include "init.h"
+#define JOYSTICKS_IMPLEMENTATION
+#include "joysticks.h"
+#define DISPLAY_IMPLEMENTATION
+#include "display.h"
+#define CONSOLE_IMPLEMENTATION
+#include "console.h"
 
 #include "logger.h"
 #include "command_line_arguments.h"
@@ -38,7 +43,7 @@ static int Main(void){
         SDL_Event event;
         while (SDL_PollEvent( &event ) != 0){
             if (HandleJoystickEvents(&list, event)){
-                LogErrorTraceReturn(1);
+                LogErrorBacktraceAndReturn(1);
             }
         }
 
@@ -63,7 +68,10 @@ static int Main(void){
 
         // Update graphic
         SDL_JoystickUpdate();
-        int lines = UpdateControllerGraphic(controller_index, list.length, current_joystick, scroll_index, size.w, size.h);
+        int lines = 0;
+        if (current_joystick){
+            lines = UpdateControllerGraphic(controller_index, list.length, current_joystick, scroll_index, size.w, size.h);
+        }
         
 
         // Handle input

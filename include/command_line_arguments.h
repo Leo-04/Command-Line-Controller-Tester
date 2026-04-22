@@ -124,7 +124,7 @@ static int ParseValue(CommandLineArgument arg, char* value){
         case ARG_LONG: {
             char *end;
             long number = strtol(value, &end, 10);
-            if (end == value || *end != '\0' || errno == ERANGE){
+            if (end == value || *end != '\0'){
                 // Invalid long
                 return 1;
             }
@@ -135,7 +135,7 @@ static int ParseValue(CommandLineArgument arg, char* value){
         case ARG_DOUBLE:{
             char *end;
             double number = strtod(value, &end);
-            if (end == value || *end != '\0' || errno == ERANGE){
+            if (end == value || *end != '\0'){
                 // Invalid double
                 return 1;
             }

@@ -1,4 +1,7 @@
-#pragma once
+#ifndef INCLUDE_CONSOLE_H
+#define INCLUDE_CONSOLE_H
+
+
 // See: https://stackoverflow.com/questions/448944/c-non-blocking-keyboard-input/448982#448982
 // Added windows suport
 
@@ -14,6 +17,7 @@ int kbhit(void);
 int getch(void);
 
 
+#endif // INCLUDE_CONSOLE_H
 #ifdef CONSOLE_IMPLEMENTATION
 
 /*
@@ -44,7 +48,6 @@ void Clear(int x, int y, int w, int h){
 }
 
 #ifdef __LINUX__
-#define fULONG "lu"
 
 #include <stdlib.h>
 #include <string.h>
@@ -97,8 +100,7 @@ int getch(void){
 }
 
 #else // __LINIX__
-// #ifdef _WIN32
-#define fULONG "llu"
+// #elseif _WIN32
 
 #include <conio.h>
 

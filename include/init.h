@@ -1,4 +1,5 @@
-#pragma once
+#ifndef INCLUDE_INIT_H
+#define INCLUDE_INIT_H
 
 #include "SDL2/sdl.h"
 #include "logger.h"
@@ -11,6 +12,7 @@ void Quit(void);
 
 extern volatile bool quit;
 
+#endif // INCLUDE_INIT_H
 #ifdef INIT_IMPLEMENTATION
 
 volatile bool quit = 0;
@@ -27,6 +29,8 @@ static void SignalHandler(int unused) {
 *   0 on success
 */
 int Init(void){
+    LogNewSession("log.txt", false);
+
     if (!SDL_SetHintWithPriority(SDL_HINT_JOYSTICK_THREAD, "1", SDL_HINT_OVERRIDE)){
         LogWarning("Cannot set SDL_HINT_JOYSTICK_THREAD: %s", SDL_GetError());
     }

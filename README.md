@@ -16,7 +16,7 @@ The file `SDL2.dll` must be present at run-time for the application to work.
 
 ## Controls
 
-`q / CTRL+C`
+`q` / `CTRL+C`
     Quit the application
 
 `1` ... `9`

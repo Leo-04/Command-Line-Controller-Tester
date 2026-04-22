@@ -1,4 +1,5 @@
-#pragma once
+#ifndef INCLUDE_JOYSTICKS_H
+#define INCLUDE_JOYSTICKS_H
 
 #include "SDL2/sdl.h"
 #include "logger.h"
@@ -16,9 +17,12 @@ int AddJoystick(JoyStickList*, SDL_Joystick*);
 int RemoveJoystick(JoyStickList*, SDL_Joystick*);
 int HandleJoystickEvents(JoyStickList*, SDL_Event);
 
-#ifdef JOYSTICK_IMPLEMENTATION
+#endif // INCLUDE_JOYSTICKS_H
+#ifdef JOYSTICKS_IMPLEMENTATION
 
-#define INITAL_SIZE 8
+#ifndef JOYSTICKS_INITAL_SIZE
+#define JOYSTICKS_INITAL_SIZE 8
+#endif
 
 /*
 * Adds a joystick to a list
@@ -41,12 +45,12 @@ int AddJoystick(JoyStickList* list, SDL_Joystick* joystick){
 
     // Check for empty list
     if (list->joysticks == NULL){
-        list->joysticks = malloc(INITAL_SIZE * sizeof(SDL_Joystick*));
+        list->joysticks = malloc(JOYSTICKS_INITAL_SIZE * sizeof(SDL_Joystick*));
         if (list->joysticks == NULL){
             LogError("Cannot malloc array");
             return 1;
         }
-        list->size = INITAL_SIZE;
+        list->size = JOYSTICKS_INITAL_SIZE;
         list->length = 0;
 
         LogDebug("Created list: %p(%i)", list->joysticks, list->size);
@@ -153,7 +157,9 @@ int HandleJoystickEvents(JoyStickList* list, SDL_Event event){
             return 1;
         }
 
-        AddJoystick(list, joystick);
+        if (AddJoystick(list, joystick)){
+            LogErrorBacktraceAndReturn(1);
+        }
         LogDebug("Added joystick: %p", joystick);
     }
 
@@ -161,4 +167,4 @@ int HandleJoystickEvents(JoyStickList* list, SDL_Event event){
 }
 
 
-#endif // JOYSTICK_IMPLEMENTATION
+#endif // JOYSTICKS_IMPLEMENTATION

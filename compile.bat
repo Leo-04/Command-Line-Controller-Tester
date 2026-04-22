@@ -6,7 +6,7 @@ set "warning_options=-Wall -pedantic-errors -Wunused-result -Wextra -Werror -Wmi
 
 set bitmode=64
 set "include_paths=-Iinclude -Isrc -Isrc/scenes"
-set "libs=-Llib -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_mixer"
+set "libs=-Llib -lmingw32 -lSDL2main -lSDL2"
 set "options=-fdiagnostics-color=always -mwindows -mconsole -fmax-errors=1 -Wfatal-errors -Wl,--gc-sections"
 
 set "defines=-D_"
